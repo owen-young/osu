@@ -18,6 +18,7 @@ using osu.Game.Graphics;
 using osu.Game.Graphics.Containers;
 using osu.Game.Graphics.UserInterface;
 using osu.Game.Online.API.Requests;
+using osu.Game.Online;
 using osu.Game.Rulesets;
 
 namespace osu.Game.Screens.Select
@@ -29,13 +30,13 @@ namespace osu.Game.Screens.Select
 
         private readonly FillFlowContainer top, statsFlow;
         private readonly AdvancedStats advanced;
-        private readonly DetailBox ratingsContainer;
+        private readonly OnlineViewContainer ratingsContainer;
+        // private readonly DetailBox ratingsContainer;
         private readonly UserRatings ratings;
         private readonly OsuScrollContainer metadataScroll;
         private readonly MetadataSection description, source, tags;
         private readonly Container failRetryContainer;
         private readonly FailRetryGraph failRetryGraph;
-        private readonly LoadingLayer loading;
 
         [Resolved]
         private IAPIProvider api { get; set; }
@@ -101,15 +102,6 @@ namespace osu.Game.Screens.Select
                                                 Padding = new MarginPadding { Horizontal = spacing, Top = spacing * 2, Bottom = spacing },
                                             },
                                         },
-                                        ratingsContainer = new DetailBox
-                                        {
-                                            Child = ratings = new UserRatings
-                                            {
-                                                RelativeSizeAxes = Axes.X,
-                                                Height = 134,
-                                                Padding = new MarginPadding { Horizontal = spacing, Top = spacing },
-                                            },
-                                        },
                                     },
                                 },
                                 metadataScroll = new OsuScrollContainer
@@ -136,6 +128,15 @@ namespace osu.Game.Screens.Select
                                 },
                             },
                         },
+                        ratingsContainer = new OnlineViewContainer("Sign in to view ratings")
+                        {
+                            Child = ratings = new UserRatings
+                            {
+                                RelativeSizeAxes = Axes.X,
+                                Height = 134,
+                                Padding = new MarginPadding { Horizontal = spacing, Top = spacing },
+                            },
+                        },
                         failRetryContainer = new Container
                         {
                             Anchor = Anchor.BottomLeft,
@@ -157,7 +158,6 @@ namespace osu.Game.Screens.Select
                         },
                     },
                 },
-                loading = new LoadingLayer(true),
             };
         }
 
@@ -228,7 +228,6 @@ namespace osu.Game.Screens.Select
             };
 
             api.Queue(lookup);
-            loading.Show();
         }
 
         private void updateMetrics()
@@ -261,8 +260,6 @@ namespace osu.Game.Screens.Select
                 };
                 failRetryContainer.FadeOut(transition_duration);
             }
-
-            loading.Hide();
         }
 
         private class DetailBox : Container
