@@ -91,7 +91,7 @@ namespace osu.Game.Screens.Select
                                     Width = 0.5f,
                                     Spacing = new Vector2(spacing),
                                     Padding = new MarginPadding { Right = spacing / 2 },
-                                    Children = new[]
+                                    Children = new Container[]
                                     {
                                         new DetailBox
                                         {
@@ -100,6 +100,17 @@ namespace osu.Game.Screens.Select
                                                 RelativeSizeAxes = Axes.X,
                                                 AutoSizeAxes = Axes.Y,
                                                 Padding = new MarginPadding { Horizontal = spacing, Top = spacing * 2, Bottom = spacing },
+                                            },
+                                        },
+                                        ratingsContainer = new OnlineViewContainer("Sign in to view ratings")
+                                        {
+                                            RelativeSizeAxes = Axes.X,
+                                            AutoSizeAxes = Axes.Y,
+                                            Child = ratings = new UserRatings
+                                            {
+                                                RelativeSizeAxes = Axes.X,
+                                                AutoSizeAxes = Axes.Y,
+                                                Padding = new MarginPadding { Horizontal = spacing, Top = spacing },
                                             },
                                         },
                                     },
@@ -126,15 +137,6 @@ namespace osu.Game.Screens.Select
                                         },
                                     },
                                 },
-                            },
-                        },
-                        ratingsContainer = new OnlineViewContainer("Sign in to view ratings")
-                        {
-                            Child = ratings = new UserRatings
-                            {
-                                RelativeSizeAxes = Axes.X,
-                                Height = 134,
-                                Padding = new MarginPadding { Horizontal = spacing, Top = spacing },
                             },
                         },
                         failRetryContainer = new Container
