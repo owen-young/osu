@@ -102,14 +102,14 @@ namespace osu.Game.Screens.Select
                                                 Padding = new MarginPadding { Horizontal = spacing, Top = spacing * 2, Bottom = spacing },
                                             },
                                         },
-                                        ratingsContainer = new OnlineViewContainer("Sign in to view ratings")
+                                        ratingsContainer = new OnlineViewContainer("Please sign in to view ratings!")
                                         {
                                             RelativeSizeAxes = Axes.X,
                                             AutoSizeAxes = Axes.Y,
                                             Child = ratings = new UserRatings
                                             {
                                                 RelativeSizeAxes = Axes.X,
-                                                AutoSizeAxes = Axes.Y,
+                                                Height = 134,
                                                 Padding = new MarginPadding { Horizontal = spacing, Top = spacing },
                                             },
                                         },
